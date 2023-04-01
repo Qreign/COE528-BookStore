@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Arshi
+ * @author a4rahim
  */
 public class OwnerBooksScreen extends Application{
     private final TableView table = new TableView();

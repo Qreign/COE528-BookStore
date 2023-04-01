@@ -35,7 +35,7 @@ public class OwnerBooksScreen extends Application{
     //main Class
     public static void main(String[] args){
         launch(args);
-    }
+    } 
     
     @Override
     public void start(Stage stage){
@@ -79,5 +79,4 @@ public class OwnerBooksScreen extends Application{
         stage.setScene(scene);
         stage.show();
     }
-    
 }

@@ -101,7 +101,7 @@ public class BookStore extends Application {
             ArrayList<Book> books = new ArrayList<>();
             if (text.size() > 0) {
                 for (String s : text) {
-                    String[] d = s.split(" ");
+                    String[] d = s.split(" \\| ");
                     books.add(new Book(d[0], Double.parseDouble(d[1])));
                 }
             }
@@ -112,7 +112,7 @@ public class BookStore extends Application {
             ArrayList<Customer> customers = new ArrayList<>();
             if (text.size() > 0) {
                 for (String s : text) {
-                    String[] d = s.split(" ");
+                    String[] d = s.split(" | ");
                     customers.add(new Customer(d[0], d[1], Integer.parseInt(d[2])));
                 }
             }

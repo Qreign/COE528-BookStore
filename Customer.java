@@ -12,7 +12,7 @@ public class Customer {
         this.user = user;
         this.pass = pass;
         this.pts = pts;
-        this.status = (pts > 1000) ? "Gold" : "Silver";
+        status = (pts > 1000) ? "Gold" : "Silver";
     }
 
     public String getUser() {
@@ -33,6 +33,10 @@ public class Customer {
     
     public String getStatus() {
         return status;
+    }
+    
+    public void setStatus() {
+        status = (pts > 1000) ? "Gold" : "Silver";
     }
     
     @Override

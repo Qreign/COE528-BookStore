@@ -12,9 +12,13 @@ import java.math.*;
  *
  * @author Carlos Bolinas
  */
-public class CustomerCostScreen {
+public class CustomerCostScreen extends Screen {
     
-    public Group display(Stage primaryStage, Customer c, double cost, boolean redeem){
+    public Group display(Stage stage) {
+        return new Group();
+    }
+    
+    public Group display(Stage stage, Customer c, double cost, boolean redeem){
         // Point calculation
         int reduction;
         if(redeem == true){
@@ -34,11 +38,7 @@ public class CustomerCostScreen {
         c.setPts(c.getPts() + ((int)cost*10));
         
         // Update status
-        if (c.getPts() < 1000){
-            c.setStatus("Silver");
-        }else{
-            c.setStatus("Gold");
-        }
+        c.setStatus();
         
         
         Group screen = new Group();
@@ -55,6 +55,7 @@ public class CustomerCostScreen {
         Button logout = new Button("Logout");
         logout.setOnAction(e ->{
             // Switch to login screen
+            stage.setScene(new Scene(new LoginScreen().display(stage)));
         });
         
         VBox vbox = new VBox();

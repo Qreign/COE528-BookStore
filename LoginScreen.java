@@ -1,16 +1,21 @@
 package bookstoreapp;
 
+import static bookstoreapp.BookStore.*;
+import java.util.*;
+import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 import javafx.scene.paint.Color;
 import javafx.scene.*;
+import javafx.stage.Stage;
 
-public class LoginScreen {
+public class LoginScreen extends Screen {
     
-    public Group display(){
+    public Group display(Stage stage) {
         
         Group screen = new Group();
+        ArrayList<Customer> customers = getCustomers();
         
         TextField fieldUsername = new TextField();
         TextField fieldPassword = new TextField();
@@ -29,8 +34,9 @@ public class LoginScreen {
             String username = fieldUsername.getText();
             String password = fieldPassword.getText();
             
-            if(username.equals(owner.getUsername()) == true && password.equals(owner.getPassword()) == true){  
+            if(username.equals("admin") && password.equals("admin")){  
             //switch screen to owner main screen
+                stage.setScene(new Scene(new OwnerStartScreen().display(stage)));
             }
             else{
                 boolean login = false;
@@ -38,9 +44,10 @@ public class LoginScreen {
                 for(int i = 0; i < customers.size(); i++){
                     //customers is the arraylist of customers
                     
-                    if(username.equals(customers.get(i).getUser()) == true && password.equals(customers.get(i).getPass()) == true){
+                    if(username.equals(customers.get(i).getUser()) && password.equals(customers.get(i).getPass())){
                         
-                        //switch screen to customer main screen
+                        //switch screen to customer main screen           
+                        stage.setScene(new Scene(new CustomerStartScreen().display(stage, customers.get(i),  FXCollections.observableArrayList(getBooks()))));
                         login = true;
                     }
                 }

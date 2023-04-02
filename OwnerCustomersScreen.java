@@ -10,9 +10,9 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
-public class OwnerCustomersScreen {
+public class OwnerCustomersScreen extends Screen {
     
-    public Group display(Stage primaryStage) {
+    public Group display(Stage stage) {
            
         Group ct = new Group();
         VBox vbox = new VBox();
@@ -93,30 +93,21 @@ public class OwnerCustomersScreen {
                 alert.showAndWait();
                 return;
             }
-            deleteCustomer(selectedCustomer);
+            removeCustomer(selectedCustomer);
             customersTable.getItems().remove(selectedCustomer);
         });
-
+        
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> {
+            stage.setScene(new Scene(new OwnerStartScreen().display(stage)));
+        });
         HBox hb = new HBox(5);
         hb.setAlignment(Pos.CENTER);
         hb.getChildren().addAll(addUsername, addPassword, addButton, deleteButton);
-
-        VBox core = new VBox(5);
-        core.setAlignment(Pos.CENTER);
-        core.setPadding(new Insets(0, 0, 0, 100));
-        core.getChildren().addAll(label, customersTable, hb);
-
-        Button backButton = new Button("Back");
-        backButton.setOnAction(e -> {
-            // TODO: navigate back to previous screen
-        });
-
-        HBox back = new HBox(5);
-        back.setPadding(new Insets(5));
-        back.setAlignment(Pos.CENTER_LEFT);
-        back.getChildren().addAll(backButton);
-
-        vbox.getChildren().addAll(back, core);
+        
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(100));
+        vbox.getChildren().addAll(label, customersTable, hb, backButton);
         ct.getChildren().addAll(vbox);
         return ct;
     }

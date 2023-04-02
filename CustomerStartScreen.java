@@ -14,14 +14,37 @@ import javafx.scene.layout.*;
 import javafx.geometry.*;
 import javafx.stage.Stage;
 
-public class CustomerStartScreen {
+public class CustomerStartScreen extends Screen {
     
-    public Group display(Stage primaryStage, Customer cust, ObservableList<Book> books) {
+    public Group display(Stage stage) {
+        return new Group();
+    }
+    
+    public Group display(Stage stage, Customer cust, ObservableList<Book> books) {
         Group screen = new Group();
         
         Button logout = new Button("Logout");
         Button buy1 = new Button("Buy");
         Button buy2 = new Button("Redeem Points and Buy");
+        buy1.setOnAction(e -> {
+            double cost = 0;
+            for (Book b: books) {
+                if (b.getSelect().isSelected()) {
+                    cost += b.getPrice();
+                }
+            }
+            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, false)));
+        });
+        
+        buy2.setOnAction(e -> {
+            double cost = 0;
+            for (Book b: books) {
+                if (b.getSelect().isSelected()) {
+                    cost += b.getPrice();
+                }
+            }
+            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, true)));
+        });
         
         TableView<Book> table = new TableView<>();
         

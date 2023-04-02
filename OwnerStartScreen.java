@@ -4,10 +4,11 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
+import javafx.stage.Stage;
 
-public class OwnerStartScreen {
+public class OwnerStartScreen extends Screen {
 
-    public Group display(){
+    public Group display(Stage stage){
         //not a clue as to what parameters go up here
         
         Group screen = new Group();
@@ -25,12 +26,15 @@ public class OwnerStartScreen {
             //idk how we're gonna switch through screens via main 
             //but heres where you'd change the scene
             //you'd go to the owner-books-screen
+            stage.setScene(new Scene(new OwnerBooksScreen().display(stage)));
         });
         buttonCustomers.setOnAction(e ->{
             //you'd go to the owner-customers-screen here
+            stage.setScene(new Scene(new OwnerCustomersScreen().display(stage)));
         });
         buttonLogout.setOnAction(e ->{
             //you'd go to the login screen here
+            stage.setScene(new Scene(new LoginScreen().display(stage)));
         });
         
         vbox.getChildren().addAll(buttonBooks, buttonCustomers, buttonLogout);

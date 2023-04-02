@@ -93,6 +93,7 @@ public class OwnerCustomersScreen extends Screen {
             if (selectedCustomer == null) {
                 // Show error message if no customer is selected
                 vbox.getChildren().add(message);
+                return;
             }
             removeCustomer(selectedCustomer);
             customersTable.getItems().remove(selectedCustomer);

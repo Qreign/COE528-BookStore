@@ -76,6 +76,7 @@ public class LoginScreen extends Screen {
         gridPane.setHgap(5);
         gridPane.setVgap(5);
         gridPane.setAlignment(Pos.CENTER);
+        gridPane.setPadding(new Insets(100));
         //formatting the grid
         
         /*

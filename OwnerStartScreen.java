@@ -39,6 +39,7 @@ public class OwnerStartScreen extends Screen {
         
         vbox.getChildren().addAll(buttonBooks, buttonCustomers, buttonLogout);
         vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(150));
         //adding buttons to a vertical column
         
         /*

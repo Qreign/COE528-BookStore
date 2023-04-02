@@ -5,6 +5,7 @@ package bookstoreapp;
  * @author vguru
  */
 
+import java.util.*;
 import javafx.collections.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -21,35 +22,45 @@ public class CustomerStartScreen extends Screen {
     }
     
     public Group display(Stage stage, Customer cust, ObservableList<Book> books) {
+        
         Group screen = new Group();
         
         Button logout = new Button("Logout");
         Button buy1 = new Button("Buy");
         Button buy2 = new Button("Redeem Points and Buy");
+        
         buy1.setOnAction(e -> {
             double cost = 0;
+            ArrayList<Book> bought = new ArrayList<>();
             for (Book b: books) {
                 if (b.getSelect().isSelected()) {
+                    bought.add(b);
                     cost += b.getPrice();
                 }
             }
-            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, false)));
+            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, false, bought)));
         });
         
         buy2.setOnAction(e -> {
             double cost = 0;
+            ArrayList<Book> bought = new ArrayList<>();
             for (Book b: books) {
                 if (b.getSelect().isSelected()) {
+                    bought.add(b);
                     cost += b.getPrice();
                 }
             }
-            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, true)));
+            stage.setScene(new Scene(new CustomerCostScreen().display(stage, cust, cost, true, bought)));
+        });
+        
+        logout.setOnAction(e -> {
+           stage.setScene(new Scene(new LoginScreen().display(stage))); 
         });
         
         TableView<Book> table = new TableView<>();
         
         // Message for Customer
-        Text greeting = new Text("Welcome, " + cust.getUser() + ".\nYour status is: " + cust.getStatus());
+        Text greeting = new Text("Welcome, " + cust.getUser() + ".\nYour status is: " + cust.getStatus() + ".\n You have " + cust.getPts() + "points.");
         greeting.setFont(new Font(14));
         
         // Title column

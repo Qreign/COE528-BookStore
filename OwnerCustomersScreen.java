@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
+import javafx.scene.paint.*;
 
 public class OwnerCustomersScreen extends Screen {
     
@@ -54,24 +55,24 @@ public class OwnerCustomersScreen extends Screen {
         final TextField addPassword = new TextField();
         addPassword.setPromptText("Password");
         addPassword.setMaxWidth(passwordCol.getPrefWidth());
+        
 
         final Button addButton = new Button("Add");
         addButton.setOnAction(e -> {
             String newUsername = addUsername.getText().trim();
             String newPassword = addPassword.getText().trim();
-
+            Label message = new Label("Please enter a unique Username and Password");
+            message.setTextFill(Color.color(1, 0, 0));
             if (newUsername.isEmpty() || newPassword.isEmpty()) {
                 // Show error message if either field is empty
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Username and password are required.");
-                alert.showAndWait();
+                vbox.getChildren().add(message);
                 return;
             }
 
             for (Customer c : getCustomers()) {
                 if (c.getUser() .equals(newUsername)) {
                     // Show error message if username already exists
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Username already exists.");
-                    alert.showAndWait();
+                    vbox.getChildren().add(message);
                     return;
                 }
             }
@@ -83,15 +84,15 @@ public class OwnerCustomersScreen extends Screen {
             addUsername.clear();
             addPassword.clear();
         });
-
+        
         final Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> {
+            Label message = new Label("Please select a row");
             Customer selectedCustomer = customersTable.getSelectionModel().getSelectedItem();
+            message.setTextFill(Color.color(1, 0, 0));
             if (selectedCustomer == null) {
                 // Show error message if no customer is selected
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Please select a customer to delete.");
-                alert.showAndWait();
-                return;
+                vbox.getChildren().add(message);
             }
             removeCustomer(selectedCustomer);
             customersTable.getItems().remove(selectedCustomer);

@@ -1,5 +1,7 @@
 package bookstoreapp;
 
+import java.util.*;
+import static bookstoreapp.BookStore.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
@@ -18,7 +20,7 @@ public class CustomerCostScreen extends Screen {
         return new Group();
     }
     
-    public Group display(Stage stage, Customer c, double cost, boolean redeem){
+    public Group display(Stage stage, Customer c, double cost, boolean redeem, ArrayList<Book> books){
         // Point calculation
         int reduction;
         if(redeem == true){
@@ -58,8 +60,12 @@ public class CustomerCostScreen extends Screen {
             stage.setScene(new Scene(new LoginScreen().display(stage)));
         });
         
+        for (Book b: books) {
+            removeBook(b);
+        }
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(200));
         vbox.getChildren().addAll(totalCost, mid, logout);
         
         screen.getChildren().addAll(vbox);

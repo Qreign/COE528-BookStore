@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 public class OwnerBooksScreen extends Screen {
 
     public Group display(Stage stage) {
-        Group bt = new Group();
+        Group obs = new Group();
         
         TableView<Book> table = new TableView<>();
         Label label = new Label("Books");
@@ -50,11 +50,11 @@ public class OwnerBooksScreen extends Screen {
         addPrice.setPromptText("Price");
 
         VBox vbox = new VBox();
-        final Button addButton = new Button("Add");
-        Label bookAddErr = new Label("Invalid Input");
-        bookAddErr.setTextFill(Color.color(1,0,0));
+        final Button add = new Button("Add");
+        Label addErr = new Label("Invalid Input");
+        addErr.setTextFill(Color.color(1,0,0));
 
-        addButton.setOnAction((ActionEvent e) -> {
+        add.setOnAction((ActionEvent e) -> {
             try {
                 double pr = Math.round((Double.parseDouble(addPrice.getText()))*100);
                 addBook(new Book(addName.getText(), pr/100));
@@ -63,11 +63,11 @@ public class OwnerBooksScreen extends Screen {
                 table.setItems(FXCollections.observableArrayList(getBooks()));
                 addName.clear();
                 addPrice.clear();
-                vbox.getChildren().remove(bookAddErr); 
+                vbox.getChildren().remove(addErr); 
             }
             catch (NumberFormatException exception){
-                if(!vbox.getChildren().contains(bookAddErr)){
-                    vbox.getChildren().add(bookAddErr);
+                if(!vbox.getChildren().contains(addErr)){
+                    vbox.getChildren().add(addErr);
                 }
             }
         });
@@ -80,7 +80,7 @@ public class OwnerBooksScreen extends Screen {
         });
 
         HBox bottom = new HBox();
-        bottom.getChildren().addAll(addName, addPrice, addButton, deleteButton);
+        bottom.getChildren().addAll(addName, addPrice, add, deleteButton);
         bottom.setSpacing(3);
         bottom.setAlignment(Pos.CENTER);
         
@@ -95,8 +95,8 @@ public class OwnerBooksScreen extends Screen {
         vbox.getChildren().addAll(label, table, bottom,back);
 
 
-        bt.getChildren().addAll(vbox);
+        obs.getChildren().addAll(vbox);
 
-        return bt;
+        return obs;
     }
 }

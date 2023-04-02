@@ -25,8 +25,8 @@ public class BookStore extends Application {
     public void start(Stage stage) {
         stage.setResizable(false);
         try {
-            read("books");
-            read("customers");
+            books = read("books");
+            customers = read("customers");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -40,7 +40,6 @@ public class BookStore extends Application {
     
     @Override
     public void stop() {
-        System.out.println("Closed");
         try {
             write("books");
             write("customers");

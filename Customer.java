@@ -41,6 +41,6 @@ public class Customer {
     
     @Override
     public String toString() {
-        return user + " " + pass + " " + pts + "\n";
+        return user + " " + pass + " " + pts;
     }
 }

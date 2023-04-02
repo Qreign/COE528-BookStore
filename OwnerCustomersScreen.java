@@ -65,15 +65,19 @@ public class OwnerCustomersScreen extends Screen {
             message.setTextFill(Color.color(1, 0, 0));
             if (newUsername.isEmpty() || newPassword.isEmpty()) {
                 // Show error message if either field is empty
-                vbox.getChildren().add(message);
-                return;
+                if (!vbox.getChildren().contains(message)) {
+                    vbox.getChildren().add(message);
+                    return;
+                }
             }
 
             for (Customer c : getCustomers()) {
                 if (c.getUser() .equals(newUsername)) {
                     // Show error message if username already exists
-                    vbox.getChildren().add(message);
-                    return;
+                    if (!vbox.getChildren().contains(message)) {
+                        vbox.getChildren().add(message);
+                        return;
+                    }
                 }
             }
 
@@ -92,7 +96,10 @@ public class OwnerCustomersScreen extends Screen {
             message.setTextFill(Color.color(1, 0, 0));
             if (selectedCustomer == null) {
                 // Show error message if no customer is selected
-                vbox.getChildren().add(message);
+                if (!vbox.getChildren().contains(message)) {
+                    vbox.getChildren().add(message);
+                    return;
+                }
             }
             removeCustomer(selectedCustomer);
             customersTable.getItems().remove(selectedCustomer);

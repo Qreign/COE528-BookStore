@@ -60,7 +60,7 @@ public class CustomerStartScreen extends Screen {
         TableView<Book> table = new TableView<>();
         
         // Message for Customer
-        Text greeting = new Text("Welcome, " + cust.getUser() + ".\nYour status is: " + cust.getStatus() + ".\n You have " + cust.getPts() + "points.");
+        Text greeting = new Text("Welcome, " + cust.getUser() + ".\nYour status is: " + cust.getStatus() + ".\n You have " + cust.getPts() + " points.");
         greeting.setFont(new Font(14));
         
         // Title column

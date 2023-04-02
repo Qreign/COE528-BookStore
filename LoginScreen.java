@@ -79,15 +79,6 @@ public class LoginScreen extends Screen {
         gridPane.setPadding(new Insets(100));
         //formatting the grid
         
-        /*
-        Scene scene = new Scene(gridPane, 600, 400);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        ^this is how i initialized the screen to test it using a main method
-        but idk how the main is gonna be so i mimicked the CustomerStartScreen,
-        feel free to change it, thanks again!
-        */
-        
         screen.getChildren().addAll(gridPane);
         
         return screen;

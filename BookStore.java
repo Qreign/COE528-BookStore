@@ -40,6 +40,7 @@ public class BookStore extends Application {
     
     @Override
     public void stop() {
+        System.out.println("Closed");
         try {
             write("books");
             write("customers");
@@ -99,18 +100,22 @@ public class BookStore extends Application {
         if ("books".equals(type)) {
             List<String> text = Files.lines(path).collect(Collectors.toList());
             ArrayList<Book> books = new ArrayList<>();
-            for (String s : text) {
-                String[] d = s.split(" ");
-                books.add(new Book(d[0], Double.parseDouble(d[1])));
+            if (text.size() > 0) {
+                for (String s : text) {
+                    String[] d = s.split(" ");
+                    books.add(new Book(d[0], Double.parseDouble(d[1])));
+                }
             }
             return books;
         }
         else {
             List<String> text = Files.lines(path).collect(Collectors.toList());
             ArrayList<Customer> customers = new ArrayList<>();
-            for (String s : text) {
-                String[] d = s.split(" ");
-                customers.add(new Customer(d[0], d[1], Integer.parseInt(d[2])));
+            if (text.size() > 0) {
+                for (String s : text) {
+                    String[] d = s.split(" ");
+                    customers.add(new Customer(d[0], d[1], Integer.parseInt(d[2])));
+                }
             }
             return customers;
         }

@@ -18,7 +18,7 @@ public class LoginScreen extends Screen {
         ArrayList<Customer> customers = getCustomers();
         
         TextField fieldUsername = new TextField();
-        TextField fieldPassword = new TextField();
+        PasswordField fieldPassword = new PasswordField();
         
         Label greeting = new Label("Welcome to the Bookstore App!");
         Label labelUser = new Label("Username:");

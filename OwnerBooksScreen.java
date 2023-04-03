@@ -27,7 +27,7 @@ public class OwnerBooksScreen extends Screen {
         
         TableView<Book> table = new TableView<>();
         Label label = new Label("Books");
-        label.setFont(new Font("Arial", 20));
+        label.setFont(new Font("Arial", 24));
 
         // Title column
         TableColumn<Book, String> title = new TableColumn<>("Title");
@@ -51,38 +51,37 @@ public class OwnerBooksScreen extends Screen {
 
         VBox vbox = new VBox();
         final Button add = new Button("Add");
-        Label addErr = new Label("Invalid Input");
-        addErr.setTextFill(Color.color(1,0,0));
+        Label message = new Label("Price must be a number");
+        message.setTextFill(Color.color(1,0,0));
 
         add.setOnAction((ActionEvent e) -> {
             try {
-                double pr = Math.round((Double.parseDouble(addPrice.getText()))*100);
-                addBook(new Book(addName.getText(), pr/100));
-                //makes new book and adds it to arraylist
-                table.getItems().clear(); //refresh page so new books can be accessed
+                double pr = Double.parseDouble(addPrice.getText());
+                addBook(new Book(addName.getText(), pr));
+                table.getItems().clear();
                 table.setItems(FXCollections.observableArrayList(getBooks()));
                 addName.clear();
                 addPrice.clear();
-                vbox.getChildren().remove(addErr); 
+                vbox.getChildren().remove(message); 
             }
             catch (NumberFormatException exception){
-                if(!vbox.getChildren().contains(addErr)){
-                    vbox.getChildren().add(addErr);
+                if(!vbox.getChildren().contains(message)){
+                    vbox.getChildren().add(message);
                 }
             }
         });
 
         final Button deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> {
-            Book selectedItem = table.getSelectionModel().getSelectedItem();
-            table.getItems().remove(selectedItem);
-            removeBook(selectedItem);
+            Book selected = table.getSelectionModel().getSelectedItem();
+            table.getItems().remove(selected);
+            removeBook(selected);
         });
 
-        HBox bottom = new HBox();
-        bottom.getChildren().addAll(addName, addPrice, add, deleteButton);
-        bottom.setSpacing(3);
-        bottom.setAlignment(Pos.CENTER);
+        HBox bot = new HBox();
+        bot.getChildren().addAll(addName, addPrice, add, deleteButton);
+        bot.setSpacing(3);
+        bot.setAlignment(Pos.CENTER);
         
         Button back = new Button("Back");
         back.setOnAction(e -> {
@@ -92,7 +91,7 @@ public class OwnerBooksScreen extends Screen {
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(5);
         vbox.setPadding(new Insets(150));
-        vbox.getChildren().addAll(label, table, bottom,back);
+        vbox.getChildren().addAll(label, table, bot, back);
 
 
         obs.getChildren().addAll(vbox);
